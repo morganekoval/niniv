@@ -61,7 +61,7 @@ const sliderVal = [
 	},
 	{
 		adj1: "Polie",
-		adj2: "Grossière",
+		adj2: "Malpolie",
 		signes: ["cfgj","bdl","k","ei","ah"]
 	},
 	{
