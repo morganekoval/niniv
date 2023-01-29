@@ -225,7 +225,7 @@ const questions = [
 		]
 	},
 	{
-		intitule: "J’ai une présentation importante à faire devant beaucoup de gens qu’à mon habitude.",
+		intitule: "J’ai une présentation importante à faire devant beaucoup plus de gens qu’à mon habitude.",
 		reponses: [
 			{
 				texte: "Ce n’est pas un problème pour moi",
