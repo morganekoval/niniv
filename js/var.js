@@ -1,11 +1,11 @@
-var scores = {belier: 0, taureau: 0, gemeaux: 0, cancer: 0, lion: 0, vierge: 0, balance: 0, scorpion: 0, sagittaire: 0, capricorne: 0, verseau: 0, poissons: 0};
+var scores = {'Bélier': 0, 'Taureau': 0, 'Gémeaux': 0, 'Cancer': 0, 'Lion': 0, 'Vierge': 0, 'Balance': 0, 'Scorpion': 0, 'Sagittaire': 0, 'Capricorne': 0, 'Verseau': 0, 'Poissons': 0};
 var rank;
 var guess = [0,0];
-var nbGuess = 1;
+var nbGuess = 0;
 
 
 const correspSignes = {
-	"belier": {
+	"Bélier": {
 		debut: {
 			mois: 3,
 			jour: 21
@@ -15,7 +15,7 @@ const correspSignes = {
 			jour: 20
 		}
 	}, 
-	"taureau": {
+	"Taureau": {
 		debut: {
 			mois: 4,
 			jour: 21
@@ -25,7 +25,7 @@ const correspSignes = {
 			jour: 20
 		}
 	}, 
-	"gemeaux": {
+	"Gémeaux": {
 		debut: {
 			mois: 5,
 			jour: 21
@@ -35,7 +35,7 @@ const correspSignes = {
 			jour: 20
 		}
 	}, 
-	"cancer": {
+	"Cancer": {
 		debut: {
 			mois: 6,
 			jour: 21
@@ -45,7 +45,7 @@ const correspSignes = {
 			jour: 22
 		}
 	}, 
-	"lion": {
+	"Lion": {
 		debut: {
 			mois: 7,
 			jour: 23
@@ -55,7 +55,7 @@ const correspSignes = {
 			jour: 22
 		}
 	}, 
-	"vierge": {
+	"Vierge": {
 		debut: {
 			mois: 8,
 			jour: 23
@@ -65,7 +65,7 @@ const correspSignes = {
 			jour: 22
 		}
 	}, 
-	"balance": {
+	"Balance": {
 		debut: {
 			mois: 9,
 			jour: 23
@@ -75,7 +75,7 @@ const correspSignes = {
 			jour: 22
 		}
 	}, 
-	"scorpion": {
+	"Scorpion": {
 		debut: {
 			mois: 10,
 			jour: 23
@@ -85,7 +85,7 @@ const correspSignes = {
 			jour: 21
 		}
 	}, 
-	"sagittaire": {
+	"Sagittaire": {
 		debut: {
 			mois: 11,
 			jour: 23
@@ -94,7 +94,8 @@ const correspSignes = {
 			mois: 12,
 			jour: 21
 		}
-	}, 	"capricorne": {
+	}, 	
+	"Capricorne": {
 		debut: {
 			mois: 12,
 			jour: 22
@@ -104,7 +105,7 @@ const correspSignes = {
 			jour: 20
 		}
 	},
-	"verseau": {
+	"Verseau": {
 		debut: {
 			mois: 1,
 			jour: 21
@@ -114,7 +115,7 @@ const correspSignes = {
 			jour: 18
 		}
 	},
-	"poissons": {
+	"Poissons": {
 		debut: {
 			mois: 2,
 			jour: 19

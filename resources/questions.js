@@ -182,7 +182,7 @@ const questions = [
 				signes: "ag"
 			},
 			{
-				texte: "Je peux quand même passer une bonne soirée mais si je ne recontacterai pas cette personne",
+				texte: "Je peux quand même passer une bonne soirée même si je ne recontacterai pas cette personne",
 				signes: "bj"
 			},
 			{

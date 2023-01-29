@@ -6,7 +6,7 @@ function loadQuestions() {
 		displayQuestion(order[i]);
 	}
 	// $("#main-test").append("<div><input type=\"submit\" value=\"Devine\"></div>");
-	$("body").append("<div><button id=\"first-guess\" onclick=\"computeScores()\">Devine</button></div>");
+	$("body").append("<div><button id=\"first-guess\" onclick=\"computeScores()\">> Devine</button></div>");
 
 }
 
@@ -31,43 +31,43 @@ function randomOrder(l) {
 function findCorresp(letter) {
 	switch(letter) {
 		case 'a':
-			scores.belier++;
+			scores["Bélier"]++;
 			break;
 		case 'b':
-			scores.taureau++;
+			scores["Taureau"]++;
 			break;
 		case 'c':
-			scores.gemeaux++;
+			scores["Gémeaux"]++;
 			break;
 		case 'd':
-			scores.cancer++;
+			scores["Cancer"]++;
 			break;
 		case 'e':
-			scores.lion++;
+			scores["Lion"]++;
 			break;
 		case 'f':
-			scores.vierge++;
+			scores["Vierge"]++;
 			break;
 		case 'g':
-			scores.balance++;
+			scores["Balance"]++;
 			break;
 		case 'h': 
-			scores.scorpion++;
+			scores["Scorpion"]++;
 			break;
 		case 'i':
-			scores.sagittaire++;
+			scores["Sagittaire"]++;
 			break;
 		case 'j':
-			scores.capricorne++;
+			scores["Capricorne"]++;
 			break;
 		case 'k':	
-			scores.verseau++;
+			scores["Verseau"]++;
 			break;
 		case 'l':
-			scores.poissons++;
+			scores["Poissons"]++;
 			break;
 		default:
-			return 'bipboup';	
+			break;
 	}
 }
 
@@ -144,6 +144,7 @@ function subBelow(tab,val) {
 }
 
 function makeAGuess() {
+	nbGuess++;
 	while(!stillPossible(rank[rank.length-1])) {
 		rank.pop();
 		if (rank.length < 1) {
@@ -195,8 +196,10 @@ function readableMonth(month) {
 
 function displayDateGuessed() {
 	$("#first-guess").hide();
-	$("#test").replaceWith("<div id=\"test\"><div>Votre date de naissance est le "+guess[1]+" "+readableMonth(guess[0])+".</div><div><input type=\"checkbox\" id=\"wrong-day\" name=\"wrong-day\"><label for=\"wrong-day\">Mauvais jour</label></input></div><div><input type=\"checkbox\" id=\"wrong-month\" name=\"wrong-month\"><label for=\"wrong-month\">Mauvais mois</label></input></div><div><input type=\"checkbox\" id=\"wrong\" name=\"wrong\" checked><label for=\"wrong\">C'est faux mais je ne te dis pas pourquoi</label></input></div><div><button onclick=\"tryAgain()\">Réessayer une nouvelle date</button></div><div><button onclick=\"end()\">C'est correct !</button></div></div>");
+	$("#test").replaceWith('<div id=\"test\"><div>Date de naissance : </br>  <button type="button" class="guess-button" onclick="changeDay()">'+guess[1]+'</button> <button type="button" class="guess-button" onclick="changeMonth()">'+readableMonth(guess[0])+'</button></div><div class="instructions">Cliquez sur une des valeurs fausses pour réessayer.</div><div><button onclick=\"end()\">> C\'est correct !</button></div></div>');
 } 
+
+
 
 function remove(tab,val) {
 	const index = tab.indexOf(val);
@@ -217,36 +220,54 @@ function onlyThisDay(tab,val) {
 	return [];
 }
 
-
-function tryAgain() {
-	nbGuess++;
-	if ($('input[name="wrong"]:checked').val() != undefined) {
-		annee[guess[0]] = remove(annee[guess[0]],guess[1]);
-	} else {
-		if ($('input[name="wrong-day"]:checked').val() != undefined) {
-			for (var i = annee.length - 1; i >= 0; i--) {
-				annee[i] = remove(annee[i], guess[1]);
-			}
-		} else {
-			for (var i = annee.length - 1; i >= 0; i--) {
-				annee[i] = onlyThisDay(annee[i], guess[1]);
-			}
-		} if ($('input[name="wrong-month"]:checked').val() != undefined) {
-			annee[guess[0]] = [];
-		} else {
-			for (var i = annee.length - 1; i >= 0; i--) {
-				if (i != guess[0]) {
-					annee[i] = [];
-				}
-			}
-		}
+function changeDay() {
+	for (var i = annee.length - 1; i >= 0; i--) {
+		annee[i] = remove(annee[i], guess[1]);
 	}
 	makeAGuess();
 }
 
+
+function changeMonth() {
+	annee[guess[0]] = [];
+	makeAGuess();
+}
+
+// function tryAgain() {
+// 	if ($('input[name="wrong"]:checked').val() != undefined) {
+// 		annee[guess[0]] = remove(annee[guess[0]],guess[1]);
+// 	} else {
+// 		if ($('input[name="wrong-day"]:checked').val() != undefined) {
+// 			for (var i = annee.length - 1; i >= 0; i--) {
+// 				annee[i] = remove(annee[i], guess[1]);
+// 			}
+// 		} else {
+// 			for (var i = annee.length - 1; i >= 0; i--) {
+// 				annee[i] = onlyThisDay(annee[i], guess[1]);
+// 			}
+// 		} if ($('input[name="wrong-month"]:checked').val() != undefined) {
+// 			annee[guess[0]] = [];
+// 		} else {
+// 			for (var i = annee.length - 1; i >= 0; i--) {
+// 				if (i != guess[0]) {
+// 					annee[i] = [];
+// 				}
+// 			}
+// 		}
+// 	}
+// 	makeAGuess();
+// }
+
 function end() {
 	// $("#guesses").replaceWith(`<div>Date trouvée en `+nbGuess+` essai(s) !!!</div><div><a href="mailto:particuliers@assistance.impots.gouv.fr?subject=On a deviné ma date de naissance !&body=C\'est très grave ce qu\'il se passe... Ma date de naissance a été devinée en ${nbGuess} essais !!>Envoyer un email au service des Impôts</a>`);
-	$("#test").replaceWith(`<div>Date trouvée en `+nbGuess+` essai(s) !!!</div><div><a href="mailto:particuliers@assistance.impots.gouv.fr?subject=On a deviné ma date de naissance !&body=C\'est très grave ce qu\'il se passe... Ma date de naissance a été devinée en ${nbGuess} essai(s) !!">Envoyer un email au service des Impôts</a>`);
+	var S = `<div>Date trouvée en `+nbGuess+` essai(s).</div><div>Voici le classement des signes basé sur votre test :<ol>`;
+	rank = ranking();
+	const nbSignes = rank.length;
+	for (var i = nbSignes - 1; i >= 0; i--) {
+		S+= `<li>${rank.pop()}</li>`
+	}
+	S+= `</ol></div><div><a href="mailto:particuliers@assistance.impots.gouv.fr?subject=On a deviné ma date de naissance !&body=C\'est très grave ce qu\'il se passe... Ma date de naissance a été devinée en ${nbGuess} essai(s) !!">Envoyer un email au service des Impôts</a><div><button type="button"><a id="homepage-again" href="${document.URL}">> Recommencer</a></button><div>`;
+	$("#test").replaceWith(S);
 
 }
 
