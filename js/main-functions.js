@@ -262,9 +262,10 @@ function end() {
 	// $("#guesses").replaceWith(`<div>Date trouvée en `+nbGuess+` essai(s) !!!</div><div><a href="mailto:particuliers@assistance.impots.gouv.fr?subject=On a deviné ma date de naissance !&body=C\'est très grave ce qu\'il se passe... Ma date de naissance a été devinée en ${nbGuess} essais !!>Envoyer un email au service des Impôts</a>`);
 	var S = `<div>Date trouvée en `+nbGuess+` essai(s).</div><div>Voici le classement des signes basé sur votre test :<ol>`;
 	rank = ranking();
+	var index = rank.indexOf(fromGuessToSign());
 	const nbSignes = rank.length;
 	for (var i = nbSignes - 1; i >= 0; i--) {
-		S+= `<li>${rank.pop()}</li>`
+		S+= (i==index) ? `<li class="correct-sign">${rank.pop()}</li>` : `<li>${rank.pop()}</li>` ;
 	}
 	S+= `</ol></div><div><a href="mailto:particuliers@assistance.impots.gouv.fr?subject=On a deviné ma date de naissance !&body=C\'est très grave ce qu\'il se passe... Ma date de naissance a été devinée en ${nbGuess} essai(s) !!">Envoyer un email au service des Impôts</a><div><button type="button"><a id="homepage-again" href="${document.URL}">> Recommencer</a></button><div>`;
 	$("#test").replaceWith(S);
@@ -318,6 +319,15 @@ function computeScoresSlider() {
 	// console.log(rank[0]);
 	// console.log(correspSignes[rank[0]]);
 	makeAGuess();
+}
+
+function fromGuessToSign() {
+	for (var key in correspSignes) {
+		if ((correspSignes[key].debut.mois == guess[0] && correspSignes[key].debut.jour >= guess[1]) || (correspSignes[key].fin.mois == guess[0] && correspSignes[key].fin.jour <= guess[1])) {
+			return key;
+		}
+	}
+	return "";
 }
 
 

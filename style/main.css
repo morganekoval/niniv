@@ -97,3 +97,7 @@ a {
   cursor: pointer;
 }
 
+.correct-sign {
+	text-decoration: underline dotted;
+}
+
