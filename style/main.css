@@ -73,3 +73,27 @@ a {
 	margin-bottom: 10px;
 }
 
+.adjectifs {
+	display: flex;
+	justify-content: space-between;
+}
+
+.slidecontainer input {
+	width: 100%;
+}
+
+.slider {
+	-webkit-appearance: none;
+	background-color: white;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #39F339;
+  cursor: pointer;
+}
+

@@ -12,6 +12,7 @@
   <!-- Loads all libraries -->
   <script src="lib/jquery-3.3.1.min.js"></script>
   <script src="resources/questions.js"></script>
+    <script src="resources/slider.js"></script>
   <script src="js/var.js"></script>
   <script src="js/main-functions.js"></script>
 
@@ -22,7 +23,12 @@
   <div class="body-quizz">
     <h1><a id="homepage-link">Quelle est ma (vraie) date d'anniversaire ?</a></h1>
     <div id="commencer">
-      <button class="start-button" type="button" onclick="loadQuestions()">> Commencer</button>
+      <div>
+        <button class="start-button" type="button" onclick="loadQuestions()">> Test à choix multiples</button>
+      </div>
+      <div>
+        <button class="start-button" type="button" onclick="loadSliders()">> Slider de personnalité</button>
+      </div>
     </div>
 
     <div id="test">

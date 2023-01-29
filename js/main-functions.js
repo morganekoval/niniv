@@ -28,43 +28,43 @@ function randomOrder(l) {
 	return order.sort((a,b) => 0.5 - Math.random());
 }
 
-function findCorresp(letter) {
+function findCorresp(letter,val) {
 	switch(letter) {
 		case 'a':
-			scores["Bélier"]++;
+			scores["Bélier"]+=val;
 			break;
 		case 'b':
-			scores["Taureau"]++;
+			scores["Taureau"]+=val;
 			break;
 		case 'c':
-			scores["Gémeaux"]++;
+			scores["Gémeaux"]+=val;
 			break;
 		case 'd':
-			scores["Cancer"]++;
+			scores["Cancer"]+=val;
 			break;
 		case 'e':
-			scores["Lion"]++;
+			scores["Lion"]+=val;
 			break;
 		case 'f':
-			scores["Vierge"]++;
+			scores["Vierge"]+=val;
 			break;
 		case 'g':
-			scores["Balance"]++;
+			scores["Balance"]+=val;
 			break;
 		case 'h': 
-			scores["Scorpion"]++;
+			scores["Scorpion"]+=val;
 			break;
 		case 'i':
-			scores["Sagittaire"]++;
+			scores["Sagittaire"]+=val;
 			break;
 		case 'j':
-			scores["Capricorne"]++;
+			scores["Capricorne"]+=val;
 			break;
 		case 'k':	
-			scores["Verseau"]++;
+			scores["Verseau"]+=val;
 			break;
 		case 'l':
-			scores["Poissons"]++;
+			scores["Poissons"]+=val;
 			break;
 		default:
 			break;
@@ -76,7 +76,7 @@ function computeScores() {
 	for (var i = 0; i < questions.length; i++) {
 		var resp = questions[i].reponses[parseInt($(`input[name="${i}"]:checked`).val())].signes;
 		for (var j = 0; j < resp.length; j++) {
-			findCorresp(resp[j]);
+			findCorresp(resp[j],1);
 			// scores.findCorresp(resp[i])++;
 		}
 
@@ -269,6 +269,55 @@ function end() {
 	S+= `</ol></div><div><a href="mailto:particuliers@assistance.impots.gouv.fr?subject=On a deviné ma date de naissance !&body=C\'est très grave ce qu\'il se passe... Ma date de naissance a été devinée en ${nbGuess} essai(s) !!">Envoyer un email au service des Impôts</a><div><button type="button"><a id="homepage-again" href="${document.URL}">> Recommencer</a></button><div>`;
 	$("#test").replaceWith(S);
 
+}
+
+
+function loadSliders() {
+	$(".start-button").hide();
+	const order = randomOrder(sliderVal.length);
+	for (var i = 0; i < order.length; i++) {
+		displaySlider(order[i]);
+	}
+	// $("#main-test").append("<div><input type=\"submit\" value=\"Devine\"></div>");
+	$("body").append("<div><button id=\"first-guess\" onclick=\"computeScoresSlider()\">> Devine</button></div>");
+
+}
+
+function displaySlider(num) {
+	var html = `<fieldset><legend>Je suis une personne plutôt :</legend><div class="adjectifs"><span>`+sliderVal[num].adj1+"</span><span>"+sliderVal[num].adj2+`</div><div class="slidecontainer"><input type="range" min="0" max="100" value="50" class="slider" name="${num}" id="${num}"></div>`;
+	$("#main-test").append(html);
+
+}
+
+
+function computeScoresSlider() {
+	for (var i = 0; i < sliderVal.length; i++) {
+		var val = $(`input[name="${i}"]`).val();
+		var deb = 4;
+		if (val < 25) {
+			deb = 0;
+		} else if (val < 45) {
+			deb = 1;
+		} else if (val < 55) {
+			deb = 2;
+		} else if (val <= 75) {
+			deb = 3;
+		}
+		console.log(deb);
+		for(var j = Math.max(0,deb-1); j < Math.min(sliderVal[i].signes.length,deb+2); j++) {
+			console.log(sliderVal[i].signes[j]);
+			var signe = sliderVal[i].signes[j];
+			for(var k = 0 ; k < signe.length ; k++) {
+				findCorresp(signe[k],(deb == j ? 1 : 0.5));
+			}
+		}
+
+	}
+	console.log(scores);
+	rank = ranking();
+	// console.log(rank[0]);
+	// console.log(correspSignes[rank[0]]);
+	makeAGuess();
 }
 
 
