@@ -59,7 +59,7 @@ fieldset input {
 }
 
 li {
-	list-style: outside upper-greek;
+	list-style: outside decimal;
 	/*list-style-type: upper-hexadecimal;*/
 }
 
